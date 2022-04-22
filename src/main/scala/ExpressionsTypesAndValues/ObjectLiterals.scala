@@ -1,10 +1,10 @@
 package ExpressionsTypesAndValues
 
-import Helper.Example
+import Helper.Exercise
 
 object ObjectLiterals {
 
-  lazy val ex1 = Example("Cat-o-matique") {
+  lazy val ex1 = Exercise("Cat-o-matique") {
 
     object Oswald {
       val colour: String = "Black"
@@ -25,10 +25,10 @@ object ObjectLiterals {
 
   type DD = Double => Double
   type II = Int => Int
-  type DDTuple = Example[(DD, DD)]
-  type IITuple = Example[(II, II)]
+  type DDTuple = Exercise[(DD, DD)]
+  type IITuple = Exercise[(II, II)]
 
-  lazy val ex2: DDTuple = Example("Square Dance") {
+  lazy val ex2: DDTuple = Exercise("Square Dance") {
 
     object calc {
       def square(d: Double): Double = d * d
@@ -38,9 +38,7 @@ object ObjectLiterals {
     (calc.square, calc.cube)
   }
 
-
-
-  lazy val ex3: IITuple = Example("Precise square dance") {
+  lazy val ex3: IITuple = Exercise("Precise square dance") {
 
     object calc {
       def square(d: Double): Double = d * d
@@ -52,14 +50,12 @@ object ObjectLiterals {
     (calc.square, calc.cube)
   }
 
-  lazy val ex4: Example[String] = Example("Greetings human") {
+  lazy val ex4: Exercise[String] = Exercise("Greetings human") {
 
     object Person {
       val firstName = "Nika"
       val lastName = "Ghurtchumelia"
     }
-
-    val p = Person
 
     object alien {
       def greet(p: Person.type): String = s"Hello ${p.firstName}"
