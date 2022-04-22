@@ -37,4 +37,6 @@ object ModelingDataWithTraits {
 
   final case class Bottle(size: Int, source: Source, carbonated: Boolean)
 
+
+
 }
