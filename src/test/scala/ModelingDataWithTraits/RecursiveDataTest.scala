@@ -2,6 +2,8 @@ package ModelingDataWithTraits
 
 import munit.FunSuite
 
+import scala.collection.immutable.ListMap
+
 class RecursiveDataTest extends FunSuite {
 
   import RecursiveData._
@@ -43,8 +45,31 @@ class RecursiveDataTest extends FunSuite {
   }
 
   test("ex7") {
-    val jsonString = ex7.get
-    assertEquals(jsonString, "{\n  \"patientWeights\": [\"99 lbs\",\"120 lbs\"],\n  \"recordName\": \"medicalRecord\",\n  \"patientAges\": [10,20],\n  \"isMigrated\": true,\n  \"score\": 10,\n}")
+
+    val exampleJson = ex7.get
+    println(exampleJson)
+    assertEquals(exampleJson, "{\n  \"patientAges\": [10,20],\n  \"recordName\": \"medicalRecord\",\n  \"isMigrated\": true,\n  \"patientWeights\": [\"99 lbs\",\"120 lbs\"],\n  \"score\": 10,\n}")
+
+    val emptyJson = Json(JsonObject(Map()))
+    println(emptyJson)
+    assertEquals(emptyJson, "{}")
+
+    val signleKeyJson = Json(JsonObject(Map("scala" -> JsonString("cool"))))
+
+    println(signleKeyJson)
+    assertEquals(signleKeyJson, "{\n  \"scala\": \"cool\" \n}")
+
+    val complexJson = Json(JsonObject(
+      ListMap(
+        "odersky" -> JsonString("great"),
+        "scalaCommunityIsGreat" -> JsonBoolean(true),
+        "javaBeatsScala" -> JsonBoolean(false),
+        "mySalaryInFuture" -> JsonNumber(100000000),
+        "myFriendList" -> JsonArray(Array()))))
+
+    println(complexJson)
+
+    assertEquals(complexJson, "{\n  \"odersky\": \"great\", \n  \"scalaCommunityIsGreat\": true, \n  \"javaBeatsScala\": false, \n  \"mySalaryInFuture\": 100000000, \n  \"myFriendList\": [] \n}")
   }
 
 

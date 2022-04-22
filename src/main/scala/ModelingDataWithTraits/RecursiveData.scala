@@ -2,6 +2,8 @@ package ModelingDataWithTraits
 
 import Helper.Exercise
 
+import scala.collection.immutable.ListMap
+
 object RecursiveData {
 
 
@@ -177,19 +179,21 @@ object RecursiveData {
   }
 
   object Json {
-    def toString(json: Json): String = json match {
+    def apply(json: Json): String = json match {
       case JsonArray(arr) => arr.map(_.toString).mkString("[",",","]")
       case JsonString(str) => s"\"${str}\""
       case JsonBoolean(bool) => bool.toString
-      case JsonObject(map) => map.map {
-        case (k, v) => s"  \"$k\": ${v.toString},\n"
-      }.mkString("{\n","","}")
+      case JsonObject(obj) => obj.map {
+        case (k, v) => {
+          if (k == obj.last._1) s"\n  \"$k\": ${v.toString} \n" else s"\n  \"$k\": ${v.toString}, "
+        }
+      }.mkString("{","","}")
       case JsonNumber(num) => num.toString
     }
   }
 
   lazy val ex7: Exercise[String] = Exercise("JSON") {
-    JsonObject(Map(
+    JsonObject(ListMap(
       "patientAges" -> JsonArray(Array(JsonNumber(10), JsonNumber(20))),
       "recordName" -> JsonString("medicalRecord"),
       "isMigrated" -> JsonBoolean(true),
