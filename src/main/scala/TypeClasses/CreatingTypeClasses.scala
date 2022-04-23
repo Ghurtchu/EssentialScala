@@ -16,8 +16,8 @@ object CreatingTypeClasses {
     implicit lazy val personFullEqual: Equal[Person] = (p1, p2) => personEmailEqual.equal(p1, p2) && p1.name == p2.name
   }
 
-  lazy val ex1 = Exercise("Equality") {
-
+  lazy val ex1: Exercise[(Person, Person)] = Exercise("Equality") {
+    (Person("Nikanor", "nikanor@gmail.com"), Person("Nika", "nikanor@gmail.com"))
   }
 
 }
